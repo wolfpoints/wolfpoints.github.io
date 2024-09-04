@@ -152,7 +152,6 @@ aside {
 /* Produtos */
 .product-container {
     display: flex;
-    flex-wrap: wrap; /* Permite que os itens "quebrem" a linha se não couberem */
     justify-content: space-between; /* Distribui o espaço uniformemente entre os itens */
     gap: 20px; /* Espaço entre os elementos */
     margin-bottom: 40px; /* Espaçamento inferior */
