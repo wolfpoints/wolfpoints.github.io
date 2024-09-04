@@ -1,3 +1,4 @@
+/* Estilos Gerais */
 body {
     background-color: #343434;
     color: white;
@@ -12,8 +13,8 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
     padding: 10px;
+    flex-wrap: nowrap;
 }
 
 #title {
@@ -22,7 +23,7 @@ header {
     line-height: 10px;
 }
 
-ul {
+ul.nav-links {
     display: flex;
     flex-direction: row;
     list-style: none;
@@ -30,8 +31,23 @@ ul {
     margin: 0;
 }
 
-li {
+ul.nav-links li {
     margin: 10px;
+}
+
+ul.nav-links a {
+    text-decoration: none;
+    color: white;
+}
+
+.menu-toggle {
+    display: none;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
 }
 
 h1 {
@@ -45,6 +61,7 @@ main {
     margin-top: 50px;
     justify-content: space-between;
     gap: 20px; /* Espaço entre os elementos */
+    align-items: center; /* Ajustado para centralizar */
 }
 
 a {
@@ -96,11 +113,11 @@ img {
 }
 
 /* Img Wolf */
-
 article {
     position: relative;
     overflow: hidden; /* Esconde partes fora do contêiner */
     border-radius: 10px;
+    flex: 1; /* Ajuste para distribuição de espaço */
 }
 
 article img {
@@ -124,16 +141,21 @@ article::after {
     z-index: -1; /* Mantém o desfoque atrás da imagem */
 }
 
-#sobre{
+aside {
+    flex: 1; /* Ajuste para distribuição de espaço */
+}
+
+#sobre {
     text-align: center;
 }
 
 /* Produtos */
 .product-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    flex-wrap: wrap; /* Permite que os itens "quebrem" a linha se não couberem */
+    justify-content: space-between; /* Distribui o espaço uniformemente entre os itens */
+    gap: 20px; /* Espaço entre os elementos */
+    margin-bottom: 40px; /* Espaçamento inferior */
 }
 
 .product-card {
@@ -142,7 +164,8 @@ article::after {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     padding: 20px;
-    width: 200px;
+    width: 30%; /* Cada produto ocupa 30% da largura do container */
+    max-width: 300px; /* Largura máxima para o cartão */
     transition: transform 0.3s;
 }
 
@@ -187,6 +210,15 @@ article::after {
     color: black;
 }
 
+.product-card:hover {
+    transform: translateY(-10px);
+}
+
+.product-card.highlight {
+    background: linear-gradient(to bottom, #8a2be2, #4d0787);
+    color: white;
+}
+
 #produtos {
     text-align: center;
     margin-bottom: 20px; /* Espaçamento inferior */
@@ -196,15 +228,6 @@ article::after {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-}
-
-h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-
-p {
-    margin-bottom: 30px;
 }
 
 .card {
@@ -268,11 +291,13 @@ p {
     text-align: center;
     padding: 20px 0;
 }
+
 .footer-logo {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
 }
+
 .footer-social-icons {
     list-style: none;
     padding: 0;
@@ -281,70 +306,139 @@ p {
     gap: 20px; /* Espaçamento entre os ícones */
     margin-bottom: 20px;
 }
+
 .footer-social-icons li a svg {
     width: 24px; /* Aumenta o tamanho dos ícones */
     height: 24px;
     fill: white;
 }
+
 .footer-social-icons li a {
     text-decoration: none;
 }
+
 .footer-copyright {
     font-size: 14px;
 }
 
+.wolf-image {
+    width: 100%; /* Tornar a imagem responsiva */
+    height: auto; /* Manter a proporção */
+    max-width: 400px; /* Limitar o tamanho máximo da imagem em telas maiores */
+    display: block; /* Garantir que ela seja um bloco completo */
+    margin: 0 auto; /* Centralizar a imagem */
+}
+
 /* Estilos Responsivos */
 @media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
     header {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
-        padding: 10px 0; /* Ajuste do padding */
+        justify-content: space-between;
+        padding: 10px 0;
+        flex-wrap: wrap;
     }
 
-    ul {
+    ul.nav-links {
+        display: none; /* Esconder o menu por padrão em dispositivos móveis */
         flex-direction: column;
-        text-align: center;
+        position: absolute;
+        top: 60px; /* Ajustar a posição do menu */
+        right: 10px;
+        background-color: #333;
+        border-radius: 5px;
+        width: 150px;
+        text-align: left;
+        padding: 10px;
     }
 
-    main {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+    ul.nav-links li {
+        margin: 10px 0; /* Ajuste de margem para itens de menu no dropdown */
+    }
+
+    .menu-toggle {
+        display: block; /* Mostrar o botão de menu em dispositivos móveis */
+    }
+
+    .show-menu {
+        display: flex !important; /* Mostrar o menu dropdown quando a classe é adicionada */
+    }
+
+    aside,
+    article {
+        flex: 1 1 100%; /* Permite que os elementos se ajustem em largura */
+        margin-bottom: 20px; /* Espaçamento inferior para elementos empilhados */
+    }
+
+    .product-container {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap; /* Permite quebra em telas menores */
+    }
+
+    .product-card {
+        width: 45%; /* Ajuste para duas colunas em telas menores */
+        max-width: 200px;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        width: 90%;
+        max-width: 300px;
+        margin: 10px auto;
     }
 
     h2 {
-        font-size: 2em; /* Ajuste para responsividade */
+        font-size: 2em;
     }
 
     p {
-        font-size: 1em; /* Ajuste para responsividade */
-        line-height: 1.5em; /* Ajuste para responsividade */
+        font-size: 1em;
+        line-height: 1.5em;
     }
 
     img {
-        max-width: 80%; /* Ajuste para responsividade */
+        max-width: 100%;
+        height: auto;
     }
+
+    .custom-button,
+    .shop-button {
+        width: auto;
+        max-width: 200px;
+    }
+
 }
 
 @media (max-width: 480px) {
+    ul.nav-links {
+        flex-direction: column; /* Ajusta a lista para colunas em telas muito pequenas */
+    }
+
     .product-card {
-        width: 150px; /* Ajuste para telas menores */
+        width: 100%; /* Ajuste para telas menores */
+        max-width: 200px;
     }
 
     .product-card img {
-        width: 80px; /* Ajuste para telas menores */
+        width: 80px;
     }
 
-    .shop-button, .custom-button {
-        padding: 8px 16px; /* Ajuste para telas menores */
-        font-size: 0.875em; /* Ajuste para telas menores */
+    .shop-button,
+    .custom-button {
+        padding: 8px 16px;
+        font-size: 0.875em;
     }
 
     h2 {
-        font-size: 1.5em; /* Ajuste para telas menores */
+        font-size: 1.5em;
     }
 
     p {
-        font-size: 0.875em; /* Ajuste para telas menores */
+        font-size: 0.875em;
     }
 }
